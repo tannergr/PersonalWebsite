@@ -1,0 +1,123 @@
+<html>
+<head>
+  <style>
+  *{
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+    html, body {
+      padding: 0;
+      margin: 0;
+    }
+    .slide{
+      position:absolute;
+      height:100%;
+      width: 100%;
+    }
+    .controls{
+      z-index: 2;
+      display: inline-block;
+    }
+    .slidecontent{
+      z-index: 1;
+    }
+    #slidebox{
+      height:400px;
+      width:600px;
+      position: relative;
+    }
+    .slidebutton{
+      font-size: 36px;
+      height: 100%;
+      width: 10%;
+      padding: 1%;
+      padding-top: 20%;
+      padding-bottom: 0;
+    }
+    .slidebutton:hover{
+      background-color: rgba(0,0,0,0.3)
+    }
+    .overlayhover{
+      width: 80%;
+      height: 100%;
+
+      float: left;
+    }
+    .next{
+      float:left;
+      text-align: right;
+    }
+    .prev{
+      float: left;
+    }
+    .slide.slidecontent>div{
+      display: none;
+    }
+    .slide.slidecontent>div>div{
+      display: none;
+      bottom: 0;
+      height: 50%;
+      width: 100%;
+      background-color: rgba(255,255,255,0.3);
+      padding: 20px;
+    }
+
+  </style>
+  <script src="jquery-2.2.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      var slideImages = [".img1",".img2"];
+      var slideText =[".aboutpic1",".aboutpic1"];
+      var currimage = 0;
+      var numImages = slideImages.length;
+      console.log("")
+      $(slideImages[currimage]).css("display","block");
+
+      $('.next').click(()=>{
+        $(slideImages[currimage]).hide();
+        currimage = currimage >= numImages-1 ? 0 : currimage + 1;
+        $(slideImages[currimage]).show();
+
+      });
+      $('.prev').click(()=>{
+        $(slideImages[currimage]).hide();
+        currimage = currimage <=0 ? numImages-1 : currimage - 1;
+        $(slideImages[currimage]).show();
+      });
+      $('.overlayhover').hover(()=>{
+        $(slideText[currimage]).show();
+        console.log("hover");
+      });
+      $('.overlayhover').mouseleave(()=>{
+        $(slideText[currimage]).hide();
+      });
+    });
+
+  </script>
+</head>
+<body>
+  <div id="slidebox">
+    <div class="slide controls">
+    <div class="slidebutton prev"><p><</p></div>
+    <div class="overlayhover"></div>
+    <div class="slidebutton next"><p>></p></div>
+    <br style="clear:both">
+    </div>
+    <div class="slide slidecontent">
+      <div class="slide img1">
+        <img class="slide" src="profile2edit.JPG">
+        <div class="slide aboutpic1">
+          Hello World1;
+        </div>
+      </div>
+      <div class="slide img2">
+        <img class="slide" src="toolbox.JPG">
+        <div class="slide aboutpic1">
+          Hello World2;
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
